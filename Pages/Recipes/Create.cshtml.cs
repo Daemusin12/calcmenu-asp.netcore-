@@ -7,6 +7,8 @@ namespace RecipeApp.Pages.Recipes
     public class CreateModel : PageModel
     {
         public Recipe recipe = new Recipe();
+        public Ingredients ingredient = new Ingredients();
+        public List<Ingredients> ingredients { get; set; } = new List<Ingredients>();
         public String errorMessage = "";
         public String successMessage = "";
         public void OnGet()

@@ -29,6 +29,29 @@
                     <a class="btn btn-danger btn-sm" href="/Recipes/Delete?id=@recipe.id">Delete</a>
                 </td>
             </tr>
+            <tr>
+                <td colspan="5">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Ingredient Name</th>
+                                <th>Quantity</th>
+                                <th>Unit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var ingredient in recipe.ingredients)
+                            {
+                                <tr>
+                                    <td>@ingredient.ingredient_name</td>
+                                    <td>@ingredient.quantity</td>
+                                    <td>@ingredient.unit</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
         }
     </tbody>
 </table>

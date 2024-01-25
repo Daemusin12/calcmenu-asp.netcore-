@@ -14,7 +14,7 @@
     </div>
 }
 
-<form method="POST">
+<form method="POST" asp-page-handler="OnPostRecipe">
     <input type="hidden" name="id" value="@Model.recipe.id" />
     <div class="row mb-3">
         <label class="col-sm col-form-label">Recipe Name</label>
@@ -35,6 +35,8 @@
         </div>
     </div>
 
+
+
     @if (Model.successMessage.Length > 0)
     {
         <div class="row mb-3">
@@ -49,11 +51,63 @@
 
     <div class="row mb-3">
         <div class="offset-sm-3 col-sm-3 d-grid">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" formaction="/Recipes/Edit?handler=OnPostIngredients" class="btn btn-primary">Submit</button>
         </div>
         <div class="col-sm-3 d-grid">
             <a class="btn btn-outline-primary" href="/recipes" role="button">Cancel</a>
         </div>
 
     </div>
+</form>
+    <td colspan="5">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Ingredient Name</th>
+                    <th>Quantity</th>
+                    <th>Unit</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ingredient in @Model.recipe.ingredients)
+                {
+                    <tr>
+                        <td>@ingredient.ingredient_name</td>
+                        <td>@ingredient.quantity</td>
+                        <td>@ingredient.unit</td>
+                        <td>
+                        <form method="post" asp-page-handler="DeleteIngredient" asp-route-id="@ingredient.id">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                         </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </td>
+<label class="col-sm col-form-label">Add Ingredients</label>
+<form method="post" asp-page-handler="Ingredients">
+    <input type="hidden" name="id" value="@Model.recipe.id" />
+    <td colspan="5">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td>
+                        <input type="text" class="form-control" name="ingredient_name" value="@Model.ingredients.ingredient_name" />
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="quantity" value="@Model.ingredients.quantity" />
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="unit" value="@Model.ingredients.unit" />
+                    </td>
+                    <td>
+                        <button type="submit"  class="btn btn-secondary">Add Ingredients</button>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </td>
 </form>
