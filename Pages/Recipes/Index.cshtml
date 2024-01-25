@@ -1,0 +1,34 @@
+﻿@page
+@model RecipeApp.Pages.Recipes.IndexModel
+@{
+}
+
+<br />
+<h2>List of Recipes</h2>
+<a class='btn btn-primary btn-sm' href='/Recipes/Create'>New Recipe</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Recipe Name</th>
+            <th>Servings</th>
+            <th>Procedure</th>
+            <th>Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var recipe in Model.listRecipes)
+        {
+            <tr>
+                <td>@recipe.recipe_name</td>
+                <td>@recipe.servings</td>
+                <td>@recipe.recipe_procedure</td>
+                <td>@recipe.created_at</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="/Recipes/Edit?id=@recipe.id">Edit</a>
+                    <a class="btn btn-danger btn-sm" href="/Recipes/Delete?id=@recipe.id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
